@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>80%+ Public Fade Engine</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #0b0c10; color: #f5f5f7; padding: 20px; margin: 0; }
+        .header { text-align: center; padding: 20px 0; border-bottom: 1px solid #1f2833; }
+        .header h1 { margin: 0; font-size: 1.4rem; font-weight: 800; letter-spacing: 1px; color: #fff; }
+        .nav-tabs { display: flex; justify-content: space-around; margin: 20px 0; border-bottom: 2px solid #1f2833; padding-bottom: 10px; }
+        .tab { font-size: 0.9rem; font-weight: 700; color: #45f3ff; text-decoration: none; padding: 5px 10px; opacity: 0.4; cursor: pointer; }
+        .tab.active { opacity: 1; border-bottom: 2px solid #45f3ff; }
+        .card { background: #1f2833; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        .alert-banner { background: #ff3333; color: #fff; font-size: 0.8rem; font-weight: 900; text-align: center; padding: 8px; border-radius: 6px; margin-bottom: 15px; letter-spacing: 1px; }
+        .matchup { font-size: 1.1rem; font-weight: 600; color: #c5a059; margin-bottom: 10px; }
+        .signal-box { background: #0b0c10; border-left: 4px solid #45f3ff; padding: 15px; margin: 15px 0; border-radius: 0 8px 8px 0; }
+        .play-label { font-size: 0.8rem; color: #45f3ff; font-weight: 800; text-transform: uppercase; margin-bottom: 5px; }
+        .play-team { font-size: 1.4rem; font-weight: 900; color: #fff; }
+        .explanation { font-size: 0.85rem; color: #c5c6c7; line-height: 1.4; margin: 0; }
+        .empty-state { text-align: center; color: #666; padding: 40px 20px; font-style: italic; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>HEAVY PUBLIC FADE PANEL</h1>
+    </div>
+
+    <div class="nav-tabs">
+        <div class="tab active" onclick="switchSport('MLB', event)">MLB</div>
+        <div class="tab" onclick="switchSport('NBA', event)">NBA</div>
+        <div class="tab" onclick="switchSport('WNBA', event)">WNBA</div>
+        <div class="tab" onclick="switchSport('NFL', event)">NFL</div>
+        <div class="tab" onclick="switchSport('CFL', event)">CFL</div>
+    </div>
+
+    <div id="display-zone"></div>
+
+    <script>
+        const data = {
+            MLB: [
+                { match: "San Francisco Giants @ Milwaukee Brewers", play: "San Francisco Giants ML (+125)", trap: "CRITICAL 80%+ FADE: Public is heavily hammering Milwaukee at an 88% ticket clip, forcing massive sharp liability onto the road dog Giants." },
+                { match: "Cleveland Guardians @ New York Yankees", play: "Cleveland Guardians +1.5 Runline", trap: "CRITICAL 80%+ FADE: Public consensus is tracking at a lopsided 82% on New York, leaving significant high-stakes sharp money on Cleveland to cover." }
+            ],
+            NBA: [], WNBA: [], NFL: [], CFL: []
+        };
+
+        function switchSport(sport, event) {
+            if (event) {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                event.target.classList.add('active');
+            }
+            const zone = document.getElementById('display-zone');
+            zone.innerHTML = '';
+            
+            if (!data[sport] || data[sport].length === 0) {
+                zone.innerHTML = '<div class="empty-state">No Extreme Public Traps (80%+) Active. Board is Clean.</div>';
+                return;
+            }
+
+            data[sport].forEach(game => {
+                zone.innerHTML += `
+                    <div class="card">
+                        <div class="alert-banner">MASSIVE 80%+ PUBLIC FADE (BET AGAINST THE CROWD)</div>
+                        <div class="matchup">${game.match}</div>
+                        <div class="signal-box">
+                            <div class="play-label">The Verified Fade Play</div>
+                            <div class="play-team">${game.play}</div>
+                        </div>
+                        <p class="explanation">${game.trap}</p>
+                    </div>`;
+            });
+        }
+        // Initialize with MLB open
+        switchSport('MLB');
+    </script>
+</body>
+</html>
